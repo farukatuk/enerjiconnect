@@ -650,7 +650,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Toast.makeText( getApplicationContext(),"MAİL İLGİLİ BİLGİLERDE EKSİKLİK VAR.",Toast.LENGTH_LONG ).show();
                 return;
             }
-            final String mailBody1 = "Sayın "+mailYetkili.toUpperCase()+", \n\n"+"Firmanızda hizmet vermekte olduğumuz "+ mailDNo+" makine numaralı " +mailMarka+
+            final String mailBody1 = mailUnvan.toUpperCase()+ "\n"+"Sayın "+mailYetkili.toUpperCase()+", \n\n"+"Firmanızda hizmet vermekte olduğumuz "+ mailDNo+" makine numaralı " +mailMarka+
                     " Marka, "+ mailModel+" Model ve "+mailSeriNo+" seri numaralı cihazınıza "+ mailTarih+" tarihinde "+mailTeknisyen+" isimli teknisyenimiz tarafından servis verilmiş olup cihaz sağlam olarak teslim edilmiştir. Yapılan işin detayları aşağıdaki gibidir.\n\n"+
                     "SİYAH BEYAZ SAYAÇ:  "+ mailSbSayac+" \n\n RENKLİ SAYAÇ:  "+mailClSayac+"\n\n BİLDİRİLEN ARIZA: "
                     +mailAriza+"\n\n YAPILAN İŞ:  "+mailIslem+"\n\n Açıklama: "+mailNot+"\n\n\n\n";
