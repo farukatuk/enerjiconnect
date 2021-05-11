@@ -25,7 +25,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation files('libs/activation.jar')
@@ -40,4 +39,5 @@ dependencies {
     implementation 'com.karumi:dexter:6.0.0'
     implementation 'com.tom_roush:pdfbox-android:1.8.10.1'
     compileOnly 'com.google.android.wearable:wearable:2.5.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }

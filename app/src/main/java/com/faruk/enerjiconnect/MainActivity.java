@@ -3,7 +3,7 @@ package com.faruk.enerjiconnect;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
+import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -20,6 +20,7 @@ import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -131,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //assetManager = getAssets();
         sesCal = new SoundPool(NR_OF_SIMULTANEOUS_SOUNDS, AudioManager.STREAM_MUSIC, 0);
         calTubularID = sesCal.load(getApplicationContext(), R.raw.tubular_c6, 1); //tubular yüklendi.
         cyrstalID = sesCal.load(getApplicationContext(), R.raw.crystal_1, 1); //tubular yüklendi.
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         passwordAlMain =degerAlMain.getString( "password",setup.passwordVer );
         tekNameAlMain = degerAlMain.getString( "tekName",setup.tekVer );
         mTekTextView.setText( tekNameAlMain );
-        mImzaButton.setVisibility(View.INVISIBLE);
+        mImzaButton.setVisibility(View.VISIBLE);
         // Sql baplantısını yapmak için stringlere koyar
         String ip = ipAlMain;
         String port = "1433";
@@ -190,12 +190,288 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String password = passwordAlMain;
         String url = "jdbc:jtds:sqlserver://"+ip+":"+port+"/"+database;
         // ************************************************************
-        // İmza Sayfasını açmak için
+        // İmza Sayfasını açmak için şimdilik bunu dş email için kullanacağım.
         mImzaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, imza.class);
-                startActivity( i );
+                // PDF raporun oluşturulması *****************
+                final String pdfRapTarihi = mdateText.getText().toString();
+                final String pdfTeknisyen = mTekTextView.getText().toString();
+                final String pdfMakNo = mDnoText.getText().toString();
+                final String pdfUnvan = munvanText.getText().toString();
+                final String pdfMarka = mMarkaText.getText().toString();
+                final String pdfModel = mModelText.getText().toString();
+                final String pdfSeriNo = mseriNoText.getText().toString();
+                final String pdfSbSayac = msbSayacText.getText().toString();
+                final String pdfClSayac = mclSayacText.getText().toString();
+                final String pdfSNo = mseriNoText.getText().toString();
+                final String pdfIsTipi = misTipiSpinner.getSelectedItem().toString();
+                final String pdfAriza = mArizaSpinner.getSelectedItem().toString();
+                final String pdfIslem = mislemSpinner.getSelectedItem().toString();
+                final String pdfAciklama = maciklamaText.getText().toString();
+                final String pdfYetkiliImza = mYetkili.getText().toString();
+                final String pdfTekImza = mTekTextView.getText().toString();
+                PdfDocument servisRapor = new PdfDocument();
+                Paint mPaint = new Paint();
+                PdfDocument.PageInfo servisPageInfo = new PdfDocument.PageInfo.Builder(250,400,1).create();
+                PdfDocument.Page mPage = servisRapor.startPage( servisPageInfo );
+                Canvas canvas = mPage.getCanvas();
+                // Sayfaya yazılacaklar burada
+                mPaint.setTextAlign( Paint.Align.LEFT );
+                mPaint.setTextSize( 9.0f );
+                // Başlık ************************
+                canvas.drawText( "ENERJİ BÜRO TEKNİK SERVİS RAPORU",50,23,mPaint );
+                mPaint.setStyle( Paint.Style.STROKE );
+                mPaint.setStrokeWidth( 1 );
+                //canvas.drawRect( 15,10,120,30,mPaint);
+                //canvas.drawBitmap( mScaledCpfLogo,170,10,mPaint );
+                // İlk Satır Tarih ve Teknisyen
+                mPaint.setStyle( Paint.Style.FILL );
+                mPaint.setTextSize(7.0f);
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText( true );
+                canvas.drawText( "TARİH :",10,60,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText( false );
+                canvas.drawText( pdfRapTarihi,40,60,mPaint );
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText( true );
+                canvas.drawText( "TEKNİSYEN :" ,98,60,mPaint);
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText( false );
+                canvas.drawText( pdfTeknisyen,150,60,mPaint );
+                canvas.drawLine( 8,50,servisPageInfo.getPageWidth()-5,50,mPaint );
+                canvas.drawLine( 8,65,servisPageInfo.getPageWidth()-5,65,mPaint );
+                canvas.drawLine( 8, 50,8,65,mPaint);
+                canvas.drawLine( 90, 50,90,65,mPaint);
+                canvas.drawLine( 245, 50,245,65,mPaint);
+                // 2. Satır ****************************************************
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "MK.NO :",10,75,mPaint );
+                canvas.drawText( "MARKA :",73,75,mPaint);
+                canvas.drawText( "MODEL :",157,75,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText( pdfMakNo, 45,75,mPaint );
+                canvas.drawText( pdfMarka, 108,75,mPaint);
+                canvas.drawText( pdfModel,189,75,mPaint );
+                canvas.drawLine( 8,80,servisPageInfo.getPageWidth()-5,80,mPaint );
+                canvas.drawLine( 8, 65,8,80,mPaint);
+                canvas.drawLine( 71, 65,71,80,mPaint);
+                canvas.drawLine( 156, 65,156,80,mPaint);
+                canvas.drawLine( 245, 65,245,80,mPaint);
+                // 3. Satır
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "S.NO:",10, 90,mPaint);
+                canvas.drawText( "SB SAY:",92,90,mPaint );
+                canvas.drawText( "CL SAY:",167,90,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText( pdfSeriNo,32,90,mPaint );
+                canvas.drawText( pdfSbSayac,122,90,mPaint );
+                canvas.drawText( pdfClSayac, 195,90,mPaint);
+                canvas.drawLine( 8,95,servisPageInfo.getPageWidth()-5,95,mPaint );
+                canvas.drawLine( 8, 80,8,95,mPaint);
+                canvas.drawLine( 91, 80,91,95,mPaint);
+                canvas.drawLine( 165, 80,165,95,mPaint);
+                canvas.drawLine( 245, 80,245,95,mPaint);
+                // 4. Satır
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "ÜNVAN:",10,105,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText( pdfUnvan,42,105,mPaint );
+                canvas.drawLine( 8,110,servisPageInfo.getPageWidth()-5,110,mPaint );
+                canvas.drawLine( 8, 95,8,110,mPaint);
+                canvas.drawLine( 245, 95,245,110,mPaint);
+                // 5.Satır
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "İŞ TİPİ:",10,120,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText( pdfIsTipi,42,120,mPaint );
+                canvas.drawLine( 8,125,servisPageInfo.getPageWidth()-5,125,mPaint );
+                canvas.drawLine( 8, 110,8,125,mPaint);
+                canvas.drawLine( 245, 110,245,125,mPaint);
+                //6.Satır
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "ARIZA:",10,135,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText( pdfAriza,42,135,mPaint);
+                canvas.drawLine( 8,140,servisPageInfo.getPageWidth()-5,140,mPaint );
+                canvas.drawLine( 8, 125,8,140,mPaint);
+                canvas.drawLine( 245, 125,245,140,mPaint);
+                //7.Satır
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "İŞLEM:",10,150,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText( pdfIslem,42,150,mPaint );
+                canvas.drawLine( 8,155,servisPageInfo.getPageWidth()-5,155,mPaint );
+                canvas.drawLine( 8, 140,8,155,mPaint);
+                canvas.drawLine( 245, 140,245,155,mPaint);
+                // 8.Satır
+
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText( "AÇIKLAMA:",10,165,mPaint );
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                // Açıklamanın bölünerek yazdırılması
+                int aciklamaSize = pdfAciklama.length();// pdf açıklamayı bölmek için boyunu ölçüyorum.
+                String[] pdfBol = new String[5];// pdf Açıklamayı bölmek için kullanılan array
+                String pdfUpper =pdfAciklama.toUpperCase(); // pdfAçıklamayı PDF de düzgün gözüksün diye büyük harfe çeviriyorum.
+                for (int k = 0;k<5;k+=6) {
+                    int satir = 10;
+                    for (int i = 0; i < aciklamaSize; i += 54) {
+                        String msg = pdfUpper.substring(i, Math.min(i + 54, aciklamaSize)); //
+                        pdfBol[k] = msg;
+                        canvas.drawText( pdfBol[k],10,(165+satir),mPaint);
+                        satir = satir +10;
+
+
+                    }
+                }
+                canvas.drawLine( 8,235,servisPageInfo.getPageWidth()-5,235,mPaint );
+                canvas.drawLine( 8, 155,8,235,mPaint);
+                canvas.drawLine( 245, 155,245,235,mPaint);
+                // Yetkili ve imza kısmı **********************************************
+                mPaint.setColor( Color.BLUE );
+                mPaint.setFakeBoldText( true );
+                mPaint.setUnderlineText(true );
+                canvas.drawText("YETKİLİ ADI:",40,250,mPaint);
+                canvas.drawText("İMZASI",45,260,mPaint);
+                //canvas.drawBitmap( mScaledSign,30,260,mPaint );
+                canvas.drawText("TEKNİSYEN",170,250,mPaint);
+                canvas.drawText("İMZASI",175,260,mPaint);
+                mPaint.setTextSize(8.0f);
+                mPaint.setColor( Color.BLACK );
+                mPaint.setFakeBoldText( false );
+                mPaint.setUnderlineText(false );
+                canvas.drawText(pdfYetkiliImza.toUpperCase(),35,275,mPaint);
+                canvas.drawText(pdfTekImza,162,275,mPaint);
+                canvas.drawLine( 8,325,servisPageInfo.getPageWidth()-5,325,mPaint );
+                canvas.drawLine( 8, 235,8,325,mPaint);
+                canvas.drawLine( 245, 235,245,325,mPaint);
+                canvas.drawLine( servisPageInfo.getPageWidth()/2, 235,servisPageInfo.getPageWidth()/2,325,mPaint);
+                // ******************************************************************************************
+                mPaint.setTextAlign(Paint.Align.CENTER);
+                mPaint.setTextSize(6.0f);
+                canvas.drawText("Bu rapor teknik servis sistemimiz tarafından bilgi amaçlı tarafınıza elektronik olarak ulaştırılmıştır.", servisPageInfo.getPageWidth()/2,335,mPaint);
+                canvas.drawText("Lütfen arıza ve malzeme taleplerinizde makine numarasını bildiriniz", servisPageInfo.getPageWidth()/2,345,mPaint);
+                mPaint.setFakeBoldText(true);
+                canvas.drawText("Adres: Bira İşçi Evleri Şehit Özer Ayrancı Sokak No:3  Mecidiyeköy,Şişli/İSTANBUL",servisPageInfo.getPageWidth()/2,360,mPaint);
+                canvas.drawText("Tel:0-212-216 21 23 Fax:0-212-216 24 50", servisPageInfo.getPageWidth()/2,370,mPaint);
+                canvas.drawText("Email: info@enerjiburo.com", servisPageInfo.getPageWidth()/2,380,mPaint);
+                servisRapor.finishPage( mPage );
+                //Dosya Yolunu al ve dosyanın adını koy
+                File dosyaYolu = new File(MainActivity.this.getExternalFilesDir(null )+"/Rapor.pdf");
+                try{
+                    //Toast.makeText(getApplicationContext(),"Rapor "+dosyaYolu+ "konumuna kaydedildi.",Toast.LENGTH_LONG).show();
+                    servisRapor.writeTo( new FileOutputStream(dosyaYolu) {
+                    } );
+
+                }catch (FileNotFoundException e) {
+
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText( getApplicationContext(),"DOSYA YAZILAMADI",Toast.LENGTH_LONG ).show();
+                }
+
+
+                // PDF Sonu ***************************
+
+                final File attachPad = new File(MainActivity.this.getExternalFilesDir(null)+"/Rapor.pdf");// Servis raporunun bulunduğu yer
+                final String mailDNo = mDnoText.getText().toString();
+                final String mailUnvan = munvanText.getText().toString();
+                final String mailMarka = mMarkaText.getText().toString();
+                final String mailModel = mModelText.getText().toString();
+                final String mailSeriNo = mseriNoText.getText().toString();
+                final String mailSbSayac = msbSayacText.getText().toString();
+                final String mailClSayac = mclSayacText.getText().toString();
+                final String mailAriza = mArizaSpinner.getSelectedItem().toString();
+                final String mailIslem = mislemSpinner.getSelectedItem().toString();
+                final String mailTeknisyen = mTekTextView.getText().toString();
+                final String mailTarih = mdateText.getText().toString();
+                final String mailNot = maciklamaText.getText().toString();
+                final String mailYetkili = mYetkili.getText().toString();
+                final String mailReceiver = mMailTo.getText().toString();
+                String[] receivers = mailReceiver.split(",");
+
+                // Eğer mmail bilgilerinde eksiklik varsa uyarılması için gerekli
+                if (mailReceiver.equals( "" )|| mailYetkili.equals( "" )||mailSbSayac.equals( "" )||mailDNo.equals( "" )){
+                    sesCal.play(korgID, LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
+                    Toast.makeText( getApplicationContext(),"MAİL İLGİLİ BİLGİLERDE EKSİKLİK VAR.",Toast.LENGTH_LONG ).show();
+                    return;
+                }
+                final String mailBody1 = mailUnvan.toUpperCase()+ "\n"+"Sayın "+mailYetkili.toUpperCase()+", \n\n"+"Firmanızda hizmet vermekte olduğumuz "+ mailDNo+" makine numaralı " +mailMarka+
+                        " Marka, "+ mailModel+" Model ve "+mailSeriNo+" seri numaralı cihazınıza "+ mailTarih+" tarihinde "+mailTeknisyen+" isimli teknisyenimiz tarafından servis verilmiş olup cihaz sağlam olarak teslim edilmiştir. Yapılan işin detayları aşağıdaki gibidir.\n\n"+
+                        "SİYAH BEYAZ SAYAÇ:  "+ mailSbSayac+" \n\n RENKLİ SAYAÇ:  "+mailClSayac+"\n\n BİLDİRİLEN ARIZA: "
+                        +mailAriza+"\n\n YAPILAN İŞ:  "+mailIslem+"\n\n Açıklama: "+mailNot+"\n\n\n\n"+
+                 "Konuyu bilgilerinize arz ederiz."+
+                        "\n\n İtirazınız olmaması durumunda bu bilgi maili içeriğinde bulunan servis bilgileri doğru kabul edilecektir."+"" +
+                        "\n\n İtirazlarınızı teknikservis@enerjiburo.com adresine iletebilirsiniz."+
+                        "\n\n\n\n\n\n Saygılarımızla,\n\n\n ENERJİ BÜRO MAKİNELERİ \n TİC.LTD.ŞTİ.";
+
+
+
+                // Dış mail uygulamasına hazırlamak için mail bilgilerinin oluşturulması ve gmailin açılması
+                Uri imageUri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID + ".provider",attachPad);
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_EMAIL,receivers);
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Enerji Büro Servis Hakkında Bilgilendirme");
+                intent.putExtra(Intent.EXTRA_TEXT,mailBody1);
+                intent.putExtra(Intent.EXTRA_CC,new String[] { "raporlar@enerjiburo.com" });
+                intent.putExtra(Intent.EXTRA_STREAM,imageUri);
+                intent.setType("text/plain");
+                startActivity(intent);
+                // *****************************************************************************************************
+
+                mDnoText.setText( "" );
+                munvanText.setText("" );
+                mbolgeText.setText( "" );
+                mMarkaText.setText( "" );
+                mModelText.setText( "" );
+                mseriNoText.setText( "" );
+                msbSayacText.setText( "0" );
+                mclSayacText.setText( "0" );
+                msonClSayacText.setText( "" );
+                msonSbSayacText.setText("");
+                mbulText.setText( "" );
+                mMailTo.setText("");
+                mYetkili.setText("");
+                maciklamaText.setText("");
+                mKayButton.setVisibility(View.INVISIBLE);
+                mImzaButton.setVisibility(View.INVISIBLE);
+
+
+
             }
         });
 
@@ -264,6 +540,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         mKayButton.setVisibility( View.INVISIBLE ); // Başlangıçta kayıt butonunu devre dışı bırakmak için.
         mMailButton.setVisibility(View.INVISIBLE);
+        mImzaButton.setVisibility(View.INVISIBLE);
         // Tarih alanına bugünün tarihinin atanması
         final Calendar today =Calendar.getInstance();
         final int toDayDay =today.get(Calendar.DAY_OF_MONTH);
@@ -613,7 +890,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //Dosya Yolunu al ve dosyanın adını koy
                 File dosyaYolu = new File(MainActivity.this.getExternalFilesDir(null )+"/Rapor.pdf");
                 try{
-                    //Toast.makeText(getApplicationContext(),"Rapor "+dosyaYolu+ "konumuna kaydedildi.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Rapor "+dosyaYolu+ "konumuna kaydedildi.",Toast.LENGTH_LONG).show();
                     servisRapor.writeTo( new FileOutputStream(dosyaYolu) {
                     } );
 
@@ -693,6 +970,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             maciklamaText.setText("");
             mKayButton.setVisibility(View.INVISIBLE);
             mMailButton.setVisibility(View.INVISIBLE);
+            mImzaButton.setVisibility(View.INVISIBLE);
             sesCal.play( calTubularID, LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE );
             Toast.makeText(MainActivity.this, mailYetkili+"  KİŞİSİNE MAIL GÖNDERİLDİ.", Toast.LENGTH_LONG).show();
 
@@ -786,8 +1064,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         );
                         sesCal.play(cyrstalID, LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);
                         Toast.makeText( MainActivity.this,"RAPOR BAŞARIYLA KAYIT EDİLDİ, EMAIL GÖNDERMEYİ UNUTMAYINIZ",Toast.LENGTH_SHORT ).show();
-                        mMailButton.setVisibility(View.VISIBLE);
+                        mMailButton.setVisibility(View.INVISIBLE);
                         mKayButton.setVisibility(View.INVISIBLE);
+                        mImzaButton.setVisibility(View.VISIBLE);
                     } catch (SQLException e) {
                         e.printStackTrace();
                         sesCal.play(calTubularID, LEFT_VOLUME, RIGHT_VOLUME, PRIORITY, NO_LOOP, NORMAL_PLAY_RATE);

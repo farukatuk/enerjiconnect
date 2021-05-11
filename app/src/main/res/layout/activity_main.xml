@@ -674,9 +674,8 @@
         android:id="@+id/servisButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="25dp"
         android:background="@drawable/border_style_button"
         android:text="@string/servisButtonText"
         android:textColor="@color/white"
@@ -684,8 +683,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/emailButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imza"
         app:layout_constraintTop_toBottomOf="@+id/custMailAdress"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -803,19 +802,13 @@
         android:id="@+id/emailButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="60dp"
         android:background="@drawable/border_style_button"
         android:text="EMAIL"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/cikButton"
-        app:layout_constraintTop_toBottomOf="@+id/custMailAdress"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="650dp" />
 
     <EditText
         android:id="@+id/yetkiliEditText"
@@ -838,18 +831,19 @@
         android:id="@+id/imza"
         android:layout_width="80dp"
         android:layout_height="40dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/border_style_button"
-        android:text="İMZA"
+        android:text="EMAIL"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/cikButton"
         app:layout_constraintTop_toBottomOf="@+id/custMailAdress"
-        app:layout_constraintVertical_bias="0.679" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
