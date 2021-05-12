@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Enerji Connect</string>
     <string name="sql">BUL</string>
-    <string name="makNoHint">Makine No</string>
+    <string name="makNoHint">D. No</string>
     <string name="unvantext">Ünvan</string>
     <string name="dosyanotitle">Mak.No</string>
     <string name="dosyanotext">Dosya No</string>
@@ -10,10 +10,10 @@
     <string name="islem_title">İŞLEM</string>
     <string name="tarih">TARİH</string>
     <string name="aciklama_title">AÇIK.</string>
-    <string name="sb_sayac_title">SB Sayaç</string>
-    <string name="sb_sayac_title_text">SB SAY</string>
+    <string name="sb_sayac_title">S Sayaç</string>
+    <string name="sb_sayac_title_text">S SAY</string>
     <string name="cl_sayac_title">Renk Sayaç</string>
-    <string name="cl_sayac_title_text">RN SAY</string>
+    <string name="cl_sayac_title_text">R SAY</string>
     <string name="tek_title_text">TEKN.</string>
     <string name="son_sbSayac_Text">S.Sb Sayaç</string>
     <string name="son_clSayac_Text">S.Cl Sayaç</string>
@@ -27,7 +27,7 @@
     <string name="serListmodel">Model</string>
     <string name="serList_seri_no">Seri No</string>
     <string name="serListSikayet">Şikayet</string>
-    <string name="serListDurumu">Durumu</string>
+    <string name="serListDurumu">Drm</string>
     <string name="serListTarih">G.Tarih</string>
     <string name="serListTeknis">Teknisyen</string>
     <string name="ara">ARA</string>
