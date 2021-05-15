@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mYetkili = findViewById( R.id.yetkiliEditText );
         mScannerButton.setVisibility( View.INVISIBLE );
         // PDF rapor için logo ve küçültülmüş logo ve imza
-       mSign = BitmapFactory.decodeFile(MainActivity.this.getExternalFilesDir(null).toString()+"/sign.png/");
+       //mSign = BitmapFactory.decodeFile(MainActivity.this.getExternalFilesDir(null).toString()+"/sign.png/");
        //mScaledSign = Bitmap.createScaledBitmap(mSign,70,30,false);
        mCpfLogo = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
        mScaledCpfLogo = Bitmap.createScaledBitmap( mCpfLogo,70,30,false );
@@ -431,7 +431,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     return;
                 }
                 final String mailBody1 = mailUnvan.toUpperCase()+ "\n"+"Sayın "+mailYetkili.toUpperCase()+", \n\n"+"Firmanızda hizmet vermekte olduğumuz "+ mailDNo+" makine numaralı " +mailMarka+
-                        " Marka, "+ mailModel+" Model ve "+mailSeriNo+" seri numaralı cihazınıza "+ mailTarih+" tarihinde "+mailTeknisyen+" isimli teknisyenimiz tarafından servis verilmiş olup cihaz sağlam olarak teslim edilmiştir. Yapılan işin detayları aşağıdaki gibidir.\n\n"+
+                        " Marka, "+ mailModel+" Model ve "+mailSeriNo+" seri numaralı cihazınıza "+ mailTarih+" tarihinde "+mailTeknisyen+" isimli teknisyenimiz tarafından servis verilmiş olup, yapılan işin detayları aşağıdaki gibidir.\n\n"+
                         "SİYAH BEYAZ SAYAÇ:  "+ mailSbSayac+" \n\n RENKLİ SAYAÇ:  "+mailClSayac+"\n\n BİLDİRİLEN ARIZA: "
                         +mailAriza+"\n\n YAPILAN İŞ:  "+mailIslem+"\n\n Açıklama: "+mailNot+"\n\n\n\n"+
                  "Konuyu bilgilerinize arz ederiz."+
@@ -928,7 +928,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return;
             }
             final String mailBody1 = mailUnvan.toUpperCase()+ "\n"+"Sayın "+mailYetkili.toUpperCase()+", \n\n"+"Firmanızda hizmet vermekte olduğumuz "+ mailDNo+" makine numaralı " +mailMarka+
-                    " Marka, "+ mailModel+" Model ve "+mailSeriNo+" seri numaralı cihazınıza "+ mailTarih+" tarihinde "+mailTeknisyen+" isimli teknisyenimiz tarafından servis verilmiş olup cihaz sağlam olarak teslim edilmiştir. Yapılan işin detayları aşağıdaki gibidir.\n\n"+
+                    " Marka, "+ mailModel+" Model ve "+mailSeriNo+" seri numaralı cihazınıza "+ mailTarih+" tarihinde "+mailTeknisyen+" isimli teknisyenimiz tarafından servis verilmiş olup, yapılan işin detayları aşağıdaki gibidir.\n\n"+
                     "SİYAH BEYAZ SAYAÇ:  "+ mailSbSayac+" \n\n RENKLİ SAYAÇ:  "+mailClSayac+"\n\n BİLDİRİLEN ARIZA: "
                     +mailAriza+"\n\n YAPILAN İŞ:  "+mailIslem+"\n\n Açıklama: "+mailNot+"\n\n\n\n";
             final String mailBody2 = "Konuyu bilgilerinize arz ederiz."+

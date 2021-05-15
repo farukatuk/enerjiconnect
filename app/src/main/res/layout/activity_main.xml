@@ -56,7 +56,6 @@
         android:layout_height="49dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -71,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="230dp"
+        android:layout_marginEnd="280dp"
         android:background="@drawable/border_style"
         android:ems="10"
         android:gravity="center"
@@ -89,28 +88,29 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-            android:id="@+id/bulButton"
-            android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="90dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/border_style_button"
-            android:text="@string/sql"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/scanButton"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/bulButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border_style_button"
+        android:text="@string/sql"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tsconnectText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/updateButton"
         android:layout_width="70dp"
         android:layout_height="40dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/border_style_button"
         android:onClick="insertRecord"
@@ -120,9 +120,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/scanButton"
+        app:layout_constraintTop_toBottomOf="@+id/tsconnectText"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -210,7 +210,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/border_style_button"
         android:gravity="center"
@@ -389,11 +389,10 @@
     <EditText
         android:id="@+id/aciklamaText"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="190dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="200dp"
         android:background="@drawable/border_style"
         android:ems="10"
         android:gravity="start|top"
@@ -404,7 +403,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/aciklamaTitle"
-        app:layout_constraintTop_toBottomOf="@+id/islemSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/islemSpinner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tekTitile"
@@ -432,8 +432,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="198dp"
         android:layout_marginEnd="300dp"
+        android:layout_marginBottom="104dp"
         android:background="@color/textcolor"
         android:gravity="center"
         android:text="@string/sb_sayac_title_text"
@@ -445,7 +446,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aciklamaText"
+        app:layout_constraintTop_toBottomOf="@+id/islemSpinner"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -453,7 +454,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="198dp"
         android:layout_marginEnd="110dp"
         android:background="@color/textcolor"
         android:gravity="center_horizontal"
@@ -463,9 +464,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/sbSayacText"
-        app:layout_constraintTop_toBottomOf="@+id/aciklamaText"
+        app:layout_constraintTop_toBottomOf="@+id/islemSpinner"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -474,7 +475,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="198dp"
         android:layout_marginEnd="210dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/border_style"
@@ -488,15 +489,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/sbSayacTitle"
-        app:layout_constraintTop_toBottomOf="@+id/aciklamaText"
-        app:layout_constraintVertical_bias="0.013" />
+        app:layout_constraintTop_toBottomOf="@+id/islemSpinner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/clSayacText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="198dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/border_style"
         android:ems="10"
@@ -509,7 +510,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/clSayacTextTitle"
-        app:layout_constraintTop_toBottomOf="@+id/aciklamaText"
+        app:layout_constraintTop_toBottomOf="@+id/islemSpinner"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
@@ -681,7 +682,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="230dp"
+        android:layout_marginEnd="280dp"
         android:background="@color/textcolor"
         android:gravity="center"
         android:text="@string/mak_no_ara"
@@ -699,8 +700,8 @@
         android:id="@+id/servisButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/border_style_button"
         android:text="@string/servisButtonText"
         android:textColor="@color/white"
@@ -737,7 +738,7 @@
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/border_style_button"
         android:text="@string/cik_Text"
         android:textColor="@color/white"
@@ -755,7 +756,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/border_style_button"
         android:gravity="center"
@@ -776,19 +777,19 @@
         android:id="@+id/scanButton"
         android:layout_width="70dp"
         android:layout_height="40dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/border_style_button"
         android:text="QCODE"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/updateButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/bulText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/bulButton"
+        app:layout_constraintTop_toBottomOf="@+id/tsconnectText"
+        app:layout_constraintVertical_bias="0.001" />
 
     <TextView
         android:id="@+id/tekNameText"
@@ -843,7 +844,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="5dp"
         android:autofillHints=""
         android:background="@drawable/border_style"
@@ -853,15 +854,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/yetkiliText"
-        app:layout_constraintTop_toBottomOf="@+id/clSayacText"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintTop_toBottomOf="@+id/sbSayacText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/imza"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/border_style_button"
         android:text="EMAIL"
         android:textColor="@color/white"
